@@ -1,0 +1,51 @@
+import java.util.*; 
+ 
+class Inventory { 
+    static HashMap<String, Integer> stock = new HashMap<>(); 
+ 
+    public static void main(String[] args) { 
+        Scanner sc = new Scanner(System.in); 
+        stock.put("12345", 10); // Barcode: Quantity 
+        stock.put("67890", 5); 
+ 
+        while (true) { 
+            System.out.print("\nEnter Barcode (or 'exit'): "); 
+            String code = sc.nextLine(); 
+            if (code.equals("exit")) break; 
+ 
+            if (stock.containsKey(code)) { 
+                System.out.println("Current Stock: " + stock.get(code)); 
+                System.out.print("Add(+) / Remove(-): "); 
+                int qty = sc.nextInt(); sc.nextLine(); 
+                stock.put(code, stock.get(code) + qty); 
+                System.out.println("Updated Stock: " + stock.get(code)); 
+            } else { 
+                System.out.println("New Product! Enter quantity: "); 
+                int qty = sc.nextInt(); sc.nextLine(); 
+                stock.put(code, qty); 
+                System.out.println("Product added."); 
+            } 
+        } 
+        sc.close(); 
+    } 
+} 
+ 
+OUTPUT: 
+ 
+Enter Barcode (or 'exit'): 12345 
+Current Stock: 10 
+Add(+) / Remove(-): -2 
+Updated Stock: 8 
+Enter Barcode (or 'exit'): 67890 
+Current Stock: 5 
+Add(+) / Remove(-): 3 
+Updated Stock: 8 
+Enter Barcode (or 'exit'): 55555 
+New Product! Enter quantity:  
+6 
+Product added. 
+Enter Barcode (or 'exit'): 55555 
+Current Stock: 6 
+Add(+) / Remove(-): 4 
+Updated Stock: 10 
+Enter Barcode (or 'exit'): exit 
